@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="ScriptSelectDialog" type="FileDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+window_title = "打开单个文件"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*.gd", "*.gdc", "*.gde", "*.gdns", "*.res", "*.tres" )
+__meta__ = {
+"_edit_use_anchors_": false
+}

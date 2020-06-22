@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/behavior_tree_plugin/behavior_tree_editor/GraphNode_Proxy.gd" type="Script" id=1]
+
+[node name="BehaviorTreeNode" type="GraphNode"]
+margin_right = 202.0
+margin_bottom = 89.0
+title = "Unkown(UnkownType)"
+show_close = true
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color( 0.952941, 0.12549, 0.901961, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 0.152941, 0.92549, 0.945098, 1 )
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = true
+slot/1/right_type = 1
+slot/1/right_color = Color( 0.972549, 0.8, 0.113725, 1 )
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color( 1, 1, 1, 1 )
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color( 0.113725, 0.952941, 0.972549, 1 )
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color( 1, 1, 1, 1 )
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 186.0
+margin_bottom = 38.0
+text = "Parent"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 39.0
+margin_right = 186.0
+margin_bottom = 53.0
+text = "Condition"
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 54.0
+margin_right = 186.0
+margin_bottom = 68.0
+text = "Agent"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 69.0
+margin_right = 186.0
+margin_bottom = 93.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 5.0
+margin_right = 46.0
+margin_bottom = 19.0
+text = "Name: "
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+margin_left = 50.0
+margin_right = 170.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 120, 0 )
+text = "Unkown"
+[connection signal="close_request" from="." to="." method="_on_BehaviorTreeNode_close_request"]
+[connection signal="dragged" from="." to="." method="_on_BehaviorTreeNode_dragged"]
+[connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
