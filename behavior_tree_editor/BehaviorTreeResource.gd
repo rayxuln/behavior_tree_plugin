@@ -17,7 +17,8 @@ enum NodeType{
 	NodeProxy,
 	NodeRandomSelector,
 	NodeSequenceSelector,
-	Condition
+	Condition,
+	ConditionDecorator
 }
 
 func node_type_to_string(t):
@@ -38,6 +39,8 @@ func node_type_to_string(t):
 			return "SequenceSelector"
 		NodeType.Condition:
 			return "Condition"
+		NodeType.ConditionDecorator:
+			return "ConditionDecorator"
 
 func create_node(type):
 	var res = {
@@ -72,6 +75,9 @@ func create_node(type):
 			res["delay_on_start"] = false
 		NodeType.Condition:
 			pass
+		NodeType.ConditionDecorator:
+			res["mode"] = 0
+			res["flip"] = false
 	nodes.append(res)
 	return res
 
@@ -155,6 +161,13 @@ func create_node_by_data(node_data):
 				n.set_script(node_data["custom_script"])
 			n.bte_identity = node_data["g_name"]
 			set_node_properties_from_data(n, node_data["data"])
+			return n
+		NodeType.ConditionDecorator:
+			var n = BehaviorTreeConditionDecorator.new()
+			n.name = node_data["name"]
+			n.bte_identity = node_data["g_name"]
+			n.mode = node_data["mode"]
+			n.flip = node_data["flip"]
 			return n
 
 func set_node_properties_from_data(node:Node, data:Dictionary):

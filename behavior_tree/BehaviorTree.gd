@@ -21,14 +21,15 @@ export(bool) var debug_mode = true
 func BehaviorTree():
 	pass
 
-func get_node_by(k, v, parent=null):
+func get_node_by(k, v, deep = true, parent=null):
 	parent = parent if parent else self
 	for c in parent.get_children():
 		if c.get(k) == v:
 			return c
-		var res = get_node_by(k, v, c)
-		if res:
-			return res
+		if deep:
+			var res = get_node_by(k, v, deep, c)
+			if res:
+				return res
 	return null
 
 func gen_nodes_from_behavior_tree_resource(res:BehaviorTreeResource):
@@ -42,9 +43,19 @@ func gen_nodes_from_behavior_tree_resource(res:BehaviorTreeResource):
 	var condition_datas = res.get_node_datas_by("type", BehaviorTreeResource.NodeType.Condition)
 	for n in condition_datas:
 		gen_node_from_data(self, n, res)
+		
+	# Generate condition decorators node
+	var condition_decorator_datas = res.get_node_datas_by("type", BehaviorTreeResource.NodeType.ConditionDecorator)
+	var condition_decorators = []
+	for n in condition_decorator_datas:
+		var new_node = gen_node_from_data(self, n, res)
+		condition_decorators.append(new_node)
 	
 	# Connect condittions node
 	connect_condition(root_node, res)
+	
+	# Connect condition decorators with conditions
+	connect_condition_decorator(condition_decorators, condition_decorator_datas, res)
 	
 	# Connect proxy node
 	connect_proxy(root_node, res)
@@ -64,10 +75,12 @@ func gen_node_from_data(parent_node:Node, node_data, res:BehaviorTreeResource):
 		return new_node
 	if node_data["type"] == BehaviorTreeResource.NodeType.Condition:
 		return new_node
+	if node_data["type"] == BehaviorTreeResource.NodeType.ConditionDecorator:
+		return new_node
 	# fetch the children
 	var children = res.get_children_by_g_name(node_data["g_name"])
 	for child in children:
-		if child["type"] != BehaviorTreeResource.NodeType.Condition:
+		if child["type"] != BehaviorTreeResource.NodeType.Condition and child["type"] != BehaviorTreeResource.NodeType.ConditionDecorator:
 			gen_node_from_data(new_node, child, res)
 	return new_node
 
@@ -78,14 +91,24 @@ func connect_condition(node:Node, res:BehaviorTreeResource):
 	# connect to condition
 	var children = res.get_children_by_g_name(node.bte_identity)
 	for child in children:
-		if child["type"] == BehaviorTreeResource.NodeType.Condition:
-			var cond = get_node_by("bte_identity", child["g_name"])
+		if child["type"] == BehaviorTreeResource.NodeType.Condition || child["type"] == BehaviorTreeResource.NodeType.ConditionDecorator:
+			var cond = get_node_by("bte_identity", child["g_name"], false)
 			node.condition_path = node.get_path_to(cond)
 	
 	# travel node
 	for child in node.get_children():
 		if child.has_method("BehaviorTreeNode"):
 			connect_condition(child, res)
+
+func connect_condition_decorator(condition_decorators:Array, condition_decorator_datas:Array, res:BehaviorTreeResource):
+	for i in condition_decorators.size():
+		var cd = condition_decorators[i]
+		
+		var children = res.get_children_by_g_name(cd.bte_identity)
+		for child in children:
+			if child["type"] == BehaviorTreeResource.NodeType.Condition || child["type"] == BehaviorTreeResource.NodeType.ConditionDecorator:
+				var cond = get_node_by("bte_identity", child["g_name"], false)
+				cd.conditions.append(cond)
 
 func connect_proxy(node:Node, res:BehaviorTreeResource):
 	if not node:

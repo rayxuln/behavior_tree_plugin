@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/behavior_tree_plugin/behavior_tree_editor/GraphNode_Condition.gd" type="Script" id=1]
+[ext_resource path="res://addons/behavior_tree_plugin/behavior_tree_editor/GraphNode_ConditionDecorator.gd" type="Script" id=1]
 
 [node name="BehaviorTreeNode" type="GraphNode"]
 margin_right = 202.0
@@ -22,9 +22,21 @@ slot/1/right_color = Color( 0.972549, 0.8, 0.113725, 1 )
 slot/2/left_enabled = false
 slot/2/left_type = 0
 slot/2/left_color = Color( 1, 1, 1, 1 )
-slot/2/right_enabled = false
+slot/2/right_enabled = true
 slot/2/right_type = 1
 slot/2/right_color = Color( 0.972549, 0.8, 0.113725, 1 )
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color( 1, 1, 1, 1 )
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color( 1, 1, 1, 1 )
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color( 1, 1, 1, 1 )
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -56,24 +68,54 @@ margin_bottom = 24.0
 rect_min_size = Vector2( 120, 0 )
 text = "Unkown"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="Label4" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 64.0
 margin_right = 186.0
 margin_bottom = 78.0
+text = "Conditions"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 79.0
+margin_right = 186.0
+margin_bottom = 99.0
 
 [node name="Label" type="Label" parent="HBoxContainer2"]
+margin_top = 3.0
 margin_right = 44.0
-margin_bottom = 14.0
-text = "Script: "
+margin_bottom = 17.0
+text = "Mode: "
 
-[node name="LinkButton" type="LinkButton" parent="HBoxContainer2"]
+[node name="ModeOptionButton" type="OptionButton" parent="HBoxContainer2"]
 margin_left = 48.0
-margin_right = 150.0
-margin_bottom = 14.0
-text = "select a script..."
-underline = 1
+margin_right = 106.0
+margin_bottom = 20.0
+text = "AND"
+items = [ "AND", null, false, 0, null, "OR", null, false, 1, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 100.0
+margin_right = 186.0
+margin_bottom = 124.0
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+margin_top = 5.0
+margin_right = 31.0
+margin_bottom = 19.0
+text = "Flip: "
+
+[node name="FlipCheckBox" type="CheckBox" parent="HBoxContainer3"]
+margin_left = 35.0
+margin_right = 59.0
+margin_bottom = 24.0
 [connection signal="close_request" from="." to="." method="_on_BehaviorTreeNode_close_request"]
 [connection signal="dragged" from="." to="." method="_on_BehaviorTreeNode_dragged"]
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
-[connection signal="pressed" from="HBoxContainer2/LinkButton" to="." method="_on_LinkButton_pressed"]
+[connection signal="item_selected" from="HBoxContainer2/ModeOptionButton" to="." method="_on_ModeOptionButton_item_selected"]
+[connection signal="toggled" from="HBoxContainer3/FlipCheckBox" to="." method="_on_FlipCheckBox_toggled"]

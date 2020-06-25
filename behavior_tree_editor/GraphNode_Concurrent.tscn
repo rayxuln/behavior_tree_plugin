@@ -105,7 +105,7 @@ margin_left = 122.0
 margin_right = 176.0
 margin_bottom = 20.0
 text = "And"
-items = [ "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null, "And", null, false, 0, null, "Or", null, false, 1, null ]
+items = [ "And", null, false, 0, null, "Or", null, false, 1, null ]
 selected = 0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
@@ -125,7 +125,7 @@ margin_left = 113.0
 margin_right = 159.0
 margin_bottom = 20.0
 text = "All"
-items = [ "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null, "All", null, false, 0, null, "Any", null, false, 1, null ]
+items = [ "All", null, false, 0, null, "Any", null, false, 1, null ]
 selected = 0
 [connection signal="close_request" from="." to="." method="_on_BehaviorTreeNode_close_request"]
 [connection signal="dragged" from="." to="." method="_on_BehaviorTreeNode_dragged"]

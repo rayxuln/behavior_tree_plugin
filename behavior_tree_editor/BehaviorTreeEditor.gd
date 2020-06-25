@@ -19,6 +19,7 @@ const GraphNode_RandomSelector = preload("GraphNode_RandomSelector.tscn")
 const GraphNode_Sequence = preload("GraphNode_SequenceSelector.tscn")
 const GraphNode_Proxy = preload("GraphNode_Proxy.tscn")
 const GraphNode_Condition = preload("GraphNode_Condition.tscn")
+const GraphNode_ConditionDecorator = preload("GraphNode_ConditionDecorator.tscn")
 
 var has_ready = false
 
@@ -111,6 +112,12 @@ func add_behavior_tree_condition():
 	slap_data_into_node(n, BehaviorTreeResource.NodeType.Condition)
 	refresh_inspetor()
 
+func add_behavior_tree_node_condition_decorator():
+	var n = GraphNode_ConditionDecorator.instance()
+	graph_edit.add_child(n)
+	slap_data_into_node(n, BehaviorTreeResource.NodeType.ConditionDecorator)
+	refresh_inspetor()
+
 func slap_data_into_node(n, type):
 	n.editor = self
 	n.resource = current_behavior_tree.behavior_tree_resource
@@ -146,6 +153,8 @@ func load_nodes_from_resource(res:BehaviorTreeResource):
 				gn = GraphNode_Sequence.instance()
 			BehaviorTreeResource.NodeType.Condition:
 				gn = GraphNode_Condition.instance()
+			BehaviorTreeResource.NodeType.ConditionDecorator:
+				gn = GraphNode_ConditionDecorator.instance()
 			BehaviorTreeResource.NodeType.NodeUndefined:
 #				gn = GraphNode_BehaviorTreeNode.instance()
 				gn = null
@@ -175,6 +184,8 @@ func load_nodes_from_resource(res:BehaviorTreeResource):
 				pass
 			BehaviorTreeResource.NodeType.Condition:
 				gn.load_action_script(r["custom_script"])
+			BehaviorTreeResource.NodeType.ConditionDecorator:
+				pass
 			BehaviorTreeResource.NodeType.NodeUndefined:
 				pass
 	
@@ -301,4 +312,9 @@ func _on_CreateBehaviorTreeNodeSequence_pressed():
 
 func _on_CreateBehaviorTreeNodeProxy_pressed():
 	add_behavior_tree_node_proxy()
+	empty_menu.visible = false
+
+
+func _on_CreateConditionDecoratorNodeButton_pressed():
+	add_behavior_tree_node_condition_decorator()
 	empty_menu.visible = false

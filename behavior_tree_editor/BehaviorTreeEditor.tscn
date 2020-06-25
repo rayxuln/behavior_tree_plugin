@@ -38,8 +38,8 @@ __meta__ = {
 visible = true
 margin_left = 252.0
 margin_top = 256.0
-margin_right = 456.0
-margin_bottom = 466.0
+margin_right = 484.0
+margin_bottom = 496.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 allow_search = true
@@ -62,51 +62,57 @@ text = "Create BehaviorTreeNode"
 flat = false
 
 [node name="CreateBehaviorTreeNodeActionButton" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 22.0
 text = "Create Action Node"
 flat = false
 
 [node name="CreateBehaviorTreeNodeConcurrent" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 26.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 48.0
 text = "Create Cocurrent Node"
 flat = false
 
 [node name="CreateBehaviorTreeNodePrioritySelector" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 52.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 74.0
 text = "Create PrioritySelect Node"
 flat = false
 
 [node name="CreateBehaviorTreeNodeProxy" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 78.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 100.0
 text = "Create Proxy Node"
 flat = false
 
 [node name="CreateBehaviorTreeNodeRandomSelector" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 104.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 126.0
 text = "Create RandomSelector Node"
 flat = false
 
 [node name="CreateBehaviorTreeNodeSequence" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 130.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 152.0
 text = "Create Sequnce Node"
 flat = false
 
 [node name="CreateConditionNodeButton" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
 margin_top = 156.0
-margin_right = 204.0
+margin_right = 232.0
 margin_bottom = 178.0
-text = "Create ConditionNode"
+text = "Create Condition Node"
+
+[node name="CreateConditionDecoratorNodeButton" type="ToolButton" parent="EmptyPopupMenu/VBoxContainer"]
+margin_top = 182.0
+margin_right = 232.0
+margin_bottom = 204.0
+text = "Create ConditionDecorator Node"
 [connection signal="_end_node_move" from="GraphEdit" to="." method="_on_GraphEdit__end_node_move"]
 [connection signal="connection_request" from="GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="delete_nodes_request" from="GraphEdit" to="." method="_on_GraphEdit_delete_nodes_request"]
@@ -121,3 +127,4 @@ text = "Create ConditionNode"
 [connection signal="pressed" from="EmptyPopupMenu/VBoxContainer/CreateBehaviorTreeNodeRandomSelector" to="." method="_on_CreateBehaviorTreeNodeRandomSelector_pressed"]
 [connection signal="pressed" from="EmptyPopupMenu/VBoxContainer/CreateBehaviorTreeNodeSequence" to="." method="_on_CreateBehaviorTreeNodeSequence_pressed"]
 [connection signal="pressed" from="EmptyPopupMenu/VBoxContainer/CreateConditionNodeButton" to="." method="_on_CreateConditionNodeButton_pressed"]
+[connection signal="pressed" from="EmptyPopupMenu/VBoxContainer/CreateConditionDecoratorNodeButton" to="." method="_on_CreateConditionDecoratorNodeButton_pressed"]
