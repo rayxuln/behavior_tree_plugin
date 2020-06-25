@@ -31,6 +31,24 @@ slot/3/left_color = Color( 1, 1, 1, 1 )
 slot/3/right_enabled = false
 slot/3/right_type = 0
 slot/3/right_color = Color( 1, 1, 1, 1 )
+slot/4/left_enabled = false
+slot/4/left_type = 0
+slot/4/left_color = Color( 1, 1, 1, 1 )
+slot/4/right_enabled = false
+slot/4/right_type = 0
+slot/4/right_color = Color( 1, 1, 1, 1 )
+slot/5/left_enabled = false
+slot/5/left_type = 0
+slot/5/left_color = Color( 1, 1, 1, 1 )
+slot/5/right_enabled = false
+slot/5/right_type = 0
+slot/5/right_color = Color( 1, 1, 1, 1 )
+slot/6/left_enabled = false
+slot/6/left_type = 0
+slot/6/left_color = Color( 1, 1, 1, 1 )
+slot/6/right_enabled = false
+slot/6/right_type = 0
+slot/6/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,28 +57,28 @@ __meta__ = {
 [node name="Label3" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 24.0
-margin_right = 186.0
+margin_right = 211.0
 margin_bottom = 38.0
 text = "Parent"
 
 [node name="Label4" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 39.0
-margin_right = 186.0
+margin_right = 211.0
 margin_bottom = 53.0
 text = "Children"
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 16.0
 margin_top = 54.0
-margin_right = 186.0
+margin_right = 211.0
 margin_bottom = 68.0
 text = "Condition"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 16.0
 margin_top = 69.0
-margin_right = 186.0
+margin_right = 211.0
 margin_bottom = 93.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
@@ -75,6 +93,64 @@ margin_right = 170.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 120, 0 )
 text = "Unkown"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 94.0
+margin_right = 211.0
+margin_bottom = 118.0
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+margin_top = 5.0
+margin_right = 115.0
+margin_bottom = 19.0
+text = "Min Select Delay: "
+
+[node name="MinSelectDelaySpinBox" type="SpinBox" parent="HBoxContainer2"]
+margin_left = 119.0
+margin_right = 193.0
+margin_bottom = 24.0
+step = 0.0
+allow_greater = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 119.0
+margin_right = 211.0
+margin_bottom = 143.0
+
+[node name="Label" type="Label" parent="HBoxContainer3"]
+margin_top = 5.0
+margin_right = 117.0
+margin_bottom = 19.0
+text = "Max Select Delay: "
+
+[node name="MaxSelectDelaySpinBox" type="SpinBox" parent="HBoxContainer3"]
+margin_left = 121.0
+margin_right = 195.0
+margin_bottom = 24.0
+step = 0.0
+allow_greater = true
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 144.0
+margin_right = 211.0
+margin_bottom = 168.0
+
+[node name="Label" type="Label" parent="HBoxContainer4"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Delay On Start: "
+
+[node name="DelayOnStartCheckBox" type="CheckBox" parent="HBoxContainer4"]
+margin_left = 104.0
+margin_right = 128.0
+margin_bottom = 24.0
 [connection signal="close_request" from="." to="." method="_on_BehaviorTreeNode_close_request"]
 [connection signal="dragged" from="." to="." method="_on_BehaviorTreeNode_dragged"]
 [connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="value_changed" from="HBoxContainer2/MinSelectDelaySpinBox" to="." method="_on_MinSelectDelaySpinBox_value_changed"]
+[connection signal="value_changed" from="HBoxContainer3/MaxSelectDelaySpinBox" to="." method="_on_MaxSelectDelaySpinBox_value_changed"]
+[connection signal="toggled" from="HBoxContainer4/DelayOnStartCheckBox" to="." method="_on_DelayOnStartCheckBox_toggled"]

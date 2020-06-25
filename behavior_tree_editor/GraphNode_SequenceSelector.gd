@@ -24,9 +24,16 @@ func BehaviorTreeEditorGraphNode():
 func _ready():
 	if resource_data:
 		$HBoxContainer/LineEdit.text = resource_data["name"]
+		
+		# update look
+		$HBoxContainer2/MinSelectDelaySpinBox.value = resource_data["min_select_delay"]
+		$HBoxContainer3/MaxSelectDelaySpinBox.value = resource_data["max_select_delay"]
+		$HBoxContainer4/DelayOnStartCheckBox.pressed = resource_data["delay_on_start"]
 	update_name()
 	
 	script_data.graph_node = self
+	
+	
 
 
 func _process(delta):
@@ -77,3 +84,15 @@ func _on_LinkButton_pressed():
 func _on_selected():
 	var editor_interface:EditorInterface = editor.the_plugin.get_editor_interface()
 	editor_interface.inspect_object(script_data)
+
+
+func _on_MinSelectDelaySpinBox_value_changed(value):
+	resource_data["min_select_delay"] = value
+
+
+func _on_MaxSelectDelaySpinBox_value_changed(value):
+	resource_data["max_select_delay"] = value
+
+
+func _on_DelayOnStartCheckBox_toggled(button_pressed):
+	resource_data["delay_on_start"] = button_pressed

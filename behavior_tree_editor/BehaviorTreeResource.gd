@@ -67,7 +67,9 @@ func create_node(type):
 			res["min_select_delay"] = 0
 			res["delay_on_start"] = false
 		NodeType.NodeSequenceSelector:
-			pass
+			res["max_select_delay"] = 0
+			res["min_select_delay"] = 0
+			res["delay_on_start"] = false
 		NodeType.Condition:
 			pass
 	nodes.append(res)
@@ -142,6 +144,9 @@ func create_node_by_data(node_data):
 			var n = BehaviorTreeNodeSequenceSelector.new()
 			n.name = node_data["name"]
 			n.bte_identity = node_data["g_name"]
+			n.min_select_delay = node_data["min_select_delay"]
+			n.max_select_delay = node_data["max_select_delay"]
+			n.delay_on_start = node_data["delay_on_start"]
 			return n
 		NodeType.Condition:
 			var n = BehaviorTreeCondition.new()
